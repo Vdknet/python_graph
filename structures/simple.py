@@ -5,12 +5,14 @@ class Node:
     def __init__(self):
         self.colour = 'white'
         self.d = math.inf
+        self.f = math.inf
         self.parent = None
         self.adj = []
 
     def __str__(self):
         return "\n{ clr:" + str(self.colour) + \
                ", d:" + str(self.d) + \
+               ", f:" + str(self.f) + \
                ", parent:" + str(self.parent) + \
                  ", adj:" + str(self.adj) + "}"
 

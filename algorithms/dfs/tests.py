@@ -4,19 +4,19 @@ from random import randint
 
 
 adjacency_list = [[1, 2, 4],
-                  [0, 2, 3, 4],
-                  [0, 1],
-                  [1],
-                  [0, 1, 5],
-                  [0],
+                  [2, 3, 4],
+                  [],
+                  [],
+                  [5],
+                  [],
+                  [7],
+                  []
                  ]
 source = 3
 
 
-for i in dfs(adjacency_list, source):
-    print(i)
+print(dfs(adjacency_list, source))
 
-print()
 
 new_adj_list = []
 
@@ -27,5 +27,5 @@ for i in range(len(adjacency_list)):
 
 source = 3
 
-for i in dfs(new_adj_list, source):
-    print(i)
+print(dfs(new_adj_list, source))
+

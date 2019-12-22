@@ -2,7 +2,8 @@ import math
 
 
 class Node:
-    def __init__(self):
+    def __init__(self, index=0):
+        self.index = index
         self.colour = 'white'
         self.d = math.inf
         self.f = math.inf
@@ -21,10 +22,10 @@ class Node:
 
 
 class Edge:
-    def __init__(self, num, val=1, edge_type=None):
+    def __init__(self, num, val=1, node_link=None):
         self.num = num
         self.val = val
-        self.type = edge_type
+        self.node = node_link
 
     def __repr__(self):
         return str(self)

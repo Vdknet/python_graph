@@ -1,6 +1,12 @@
 
 
 class Schedule(dict):
+    def __init__(self):
+        self.submitted = 0
+        self.requested = 0
+        self.average_latency = 0.0
+        self.max_latency = 0
+
     def write_one(self, s, d, t, query):
         old = self.get(query)
         if old is None:
@@ -19,13 +25,20 @@ class Schedule(dict):
         result = True
         for path in values:
             for note in path:
-                if note.get('s') == a and note.get('d') == b and note.get('t') == t:
+                if note.get('s') == a and note.get('d') == b and \
+                        note.get('t') == t:
                     result = False
                     break
         return result
 
-    def nearest_step(self, a, b, t, max_t=10):
+    def nearest_step(self, a, b, t, max_t=6):
         for i in range(t+1, max_t):
             if self.is_free(a, b, i):
                 return i
         return None
+
+    def __str__(self):
+        return "\n{requested: " + str(self.requested) +\
+               ", submitted: " + str(self.submitted) +\
+               ", average L:" + str(self.average_latency) +\
+               ", max L:" + str(self.max_latency) + "}"

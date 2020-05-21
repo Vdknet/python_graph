@@ -1,4 +1,5 @@
 import math
+import random
 
 
 class Query:
@@ -8,9 +9,15 @@ class Query:
         self.band = band
         self.subq = []
         self.index = index
+        self.latency = 0
         k = math.ceil(band/bandstep)
+        bufband = 0
         for i in range(k):
-            self.subq.append(SubQuery(source, dest, self, i))
+            b = bandstep
+            if bufband + bandstep >= band:
+                b = band - bufband
+            bufband += bandstep
+            self.subq.append(SubQuery(source, dest, self, i, b))
 
     def __hash__(self):
         return hash((self.source, self.dest, self.band, self.index))
@@ -24,11 +31,12 @@ class Query:
 
 
 class SubQuery:
-    def __init__(self, source, dest, mainq, index):
+    def __init__(self, source, dest, mainq, index, bandwidth):
         self.source = source
         self.dest = dest
         self.mainq = mainq
         self.index = index
+        self.bandwidth = bandwidth
 
     def __str__(self):
         return "\n{source: " + str(self.source) +\
@@ -43,3 +51,26 @@ class SubQuery:
 
     def __ne__(self, other):
         return not(self == other)
+
+
+class QuerySet(list):
+    def __init__(self):
+        self.queries_list = []
+        self.main_list = []
+        self.additional_list = []
+
+    def add_query_item(self, query):
+        self.main_list.append(len(self.queries_list))
+        self.queries_list.append(query)
+        sub_list = []
+        for i in range(len(query.subq)):
+            sub_list.append(i)
+        self.additional_list.append(sub_list)
+
+    def pick_random_subquery(self):
+        query_index = random.choice(self.main_list)
+        query = self.queries_list[query_index]
+        subq_index = self.additional_list[query_index].pop(0)
+        if len(self.additional_list[query_index]) == 0:
+            self.main_list.remove(query_index)
+        return query.subq[subq_index]

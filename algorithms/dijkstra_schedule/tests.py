@@ -17,6 +17,7 @@ queries = [{'s': 0, 'd': 6, 'b': 300},
 schedule = dijkstra_schedule(queries, adjacency_list)
 for q in schedule.keys():
     print(q, schedule.get(q))
+print(schedule)
 
 print('==================================')
 
@@ -34,6 +35,8 @@ adjacency_list = [[1, 2, 3],
                  ]
 
 queries = [{'s': 7, 'd': 10, 'b': 250},
+           {'s': 2, 'd': 6, 'b': 1000},
+           {'s': 0, 'd': 4, 'b': 1000},
            {'s': 8, 'd': 1, 'b': 400},
            {'s': 0, 'd': 6, 'b': 300},
            {'s': 5, 'd': 1, 'b': 150},
@@ -43,3 +46,4 @@ queries = [{'s': 7, 'd': 10, 'b': 250},
 schedule = dijkstra_schedule(queries, adjacency_list)
 for q in schedule.keys():
     print(q, schedule.get(q))
+print(schedule)

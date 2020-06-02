@@ -1,4 +1,6 @@
-from algorithms.dijkstra_schedule.dijsktra_schedule import dijkstra_schedule
+from algorithms.dijkstra_schedule.dijsktra_schedule import dijkstra_schedule, accurate_solution
+
+print('\nSample 1')
 
 adjacency_list = [[1, 2, 4],
                   [2, 3],
@@ -15,11 +17,23 @@ queries = [{'s': 0, 'd': 6, 'b': 300},
 
 
 schedule = dijkstra_schedule(queries, adjacency_list)
+accurate_schedule = accurate_solution(queries, adjacency_list)
 for q in schedule.keys():
     print(q, schedule.get(q))
 print(schedule)
 
-print('==================================')
+
+print('\n==================================')
+
+print('\nAccurate solution:')
+
+for q in accurate_schedule.keys():
+    print(q, accurate_schedule.get(q))
+print(accurate_schedule)
+
+print('\n==================================')
+
+print('\nSample 2')
 
 adjacency_list = [[1, 2, 3],
                   [4, 10],
@@ -44,6 +58,15 @@ queries = [{'s': 7, 'd': 10, 'b': 250},
 
 
 schedule = dijkstra_schedule(queries, adjacency_list)
+accurate_schedule = accurate_solution(queries, adjacency_list)
 for q in schedule.keys():
     print(q, schedule.get(q))
 print(schedule)
+
+print('\n==================================')
+
+print('\nAccurate solution:')
+
+for q in accurate_schedule.keys():
+    print(q, accurate_schedule.get(q))
+print(accurate_schedule)
